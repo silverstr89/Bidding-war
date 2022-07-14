@@ -29,6 +29,8 @@ var pvtKey string = os.Getenv("PRIVATE_KEY")
 
 var contract string = "0xa51d07bC2dB396Ae209D025566941BE3A6FEd54C"
 
+var ethAddress string = os.Getenv("ETH_RINKEBY")
+
 func main() {
 	log.Println("Starting the HTTP server on port 8090")
 	router := mux.NewRouter().StrictSlash(true)
@@ -159,7 +161,7 @@ func gameInfo() []byte {
 
 //  ----------------- Setters ------------------- //
 func makeBid(value *big.Int) {
-	client, err := ethclient.Dial("https://nodeapi.test.energi.network/v1/jsonrpc")
+	client, err := ethclient.Dial(ethAddress)
 	if err != nil {
 		log.Fatal(err)
 	}
@@ -198,7 +200,7 @@ func makeBid(value *big.Int) {
 }
 
 func StartGame() {
-	client, err := ethclient.Dial("https://nodeapi.test.energi.network/v1/jsonrpc")
+	client, err := ethclient.Dial(ethAddress)
 	if err != nil {
 		log.Fatal(err)
 	}
@@ -238,7 +240,7 @@ func StartGame() {
 }
 
 func EndRoundAndRestart() {
-	client, err := ethclient.Dial("https://nodeapi.test.energi.network/v1/jsonrpc")
+	client, err := ethclient.Dial(ethAddress)
 	if err != nil {
 		log.Fatal(err)
 	}
@@ -279,7 +281,7 @@ func EndRoundAndRestart() {
 
 // websocket RPC is required
 func eventSubscribe() {
-	client, err := ethclient.Dial("https://nodeapi.test.energi.network/v1/jsonrpc")
+	client, err := ethclient.Dial(ethAddress)
 	if err != nil {
 		log.Fatal(err)
 	}
@@ -305,7 +307,7 @@ func eventSubscribe() {
 }
 
 func makeBidEvent(start *big.Int, end *big.Int) [][]byte {
-	client, err := ethclient.Dial("https://nodeapi.test.energi.network/v1/jsonrpc")
+	client, err := ethclient.Dial(ethAddress)
 	if err != nil {
 		log.Fatal(err)
 	}
@@ -356,7 +358,7 @@ func makeBidEvent(start *big.Int, end *big.Int) [][]byte {
 
 //  ----------------- Utils ------------------- //
 func getInstance() *store.Store {
-	client, err := ethclient.Dial("https://nodeapi.test.energi.network/v1/jsonrpc")
+	client, err := ethclient.Dial(ethAddress)
 	if err != nil {
 		log.Fatal(err)
 	}
